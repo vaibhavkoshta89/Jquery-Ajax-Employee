@@ -63,12 +63,12 @@ public class EmployeeDetails {
 			ObjectMapper mapper = new ObjectMapper();  
 			EmployeeEntry itemEntry = mapper.readValue(incomingData, EmployeeEntry.class);
 			
-			int http_code = EmployeeDAO.insertEmp(itemEntry.EMPNO, 
-													itemEntry.ENAME, 
-													itemEntry.JOB, 
-													itemEntry.MGR, 
-													itemEntry.HIREDATE, 
-													itemEntry.SAL,itemEntry.COMM,itemEntry.DEPTNO);
+			int http_code = EmployeeDAO.insertEmp(itemEntry.empno, 
+													itemEntry.ename, 
+													itemEntry.job, 
+													itemEntry.mgr, 
+													itemEntry.hiredate, 
+													itemEntry.sal,itemEntry.comm,itemEntry.deptno);
 			
 			if( http_code == 200 ) {
 				//returnString = jsonArray.toString();

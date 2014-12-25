@@ -38,7 +38,7 @@ function doalert(obj){
 }
 
 $('#submitEmployee').click(function(e) {
-	console.log("submit button has been clicked");
+	
 	e.preventDefault(); //cancel form submit
 	
 	
