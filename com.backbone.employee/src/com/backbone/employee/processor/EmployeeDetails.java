@@ -46,10 +46,6 @@ public class EmployeeDetails {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response insertEmployee(String incomingData) throws Exception{
 		System.out.println("insertEmployee()");
-		String returnString = null;
-		
-		
-		
 		try {
 			System.out.println("incomingData: " + incomingData);
 			
@@ -71,8 +67,6 @@ public class EmployeeDetails {
 													itemEntry.SAL,itemEntry.COMM,itemEntry.DEPTNO);
 			
 			if( http_code == 200 ) {
-				//returnString = jsonArray.toString();
-				returnString = "Item inserted";
 			} else {
 				return Response.status(500).entity("Unable to process Item").build();
 			}
