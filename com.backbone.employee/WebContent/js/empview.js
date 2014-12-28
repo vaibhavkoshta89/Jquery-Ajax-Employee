@@ -42,11 +42,27 @@ window.EmpList = Backbone.View.extend({
 });
 
 window.UserEdit = Backbone.View.extend({
-	el:'.page',
-	render:function(){
-		
-		var template = _.template($("#edit-employee-template").html(),{});
+	el:'.employee-form',
+	render:function(options){
+		var that = this;
+		if(options.id){
+			console.log(options.id);
+			that.employee = new Employee({id: options.id});
+			
+			that.employee.fetch({
+				success:function(employee){
+				
+				var template = _.template($("#edit-employee-template").html(),{employee: employee});
+				
+				that.$el.html(template);
+				}
+			})
+			
+		}
+		else{
+		var template = _.template($("#edit-employee-template").html(),{employee: null});
 		this.$el.html(template);
+		}
 	},
 	events:{
 		'click .addUser':'saveEmployee'
@@ -57,7 +73,7 @@ window.UserEdit = Backbone.View.extend({
 		var employee = new Employee();
 		employee.save(empDetails,{
 			success:function(){
-				alert("User saved!!");
+				router.navigate('',{trigger:true});
 			}
 		});
 		console.log(empDetails)
@@ -73,7 +89,8 @@ var editUser = new window.UserEdit();
 window.Router1 = Backbone.Router.extend({
 	routes:{
 		"":"home",
-		"new":"addUser"
+		"new":"addUser",
+		"editEmp/:id":"addUser"
 	}
 	
 });
@@ -84,8 +101,8 @@ var router =new window.Router1();
 		empList.render();
 		
 	});
-	this.router.on("route:addUser",function(){
-		editUser.render();
+	this.router.on("route:addUser",function(id){
+		editUser.render({id:id});
 		
 	});
 Backbone.history.start();

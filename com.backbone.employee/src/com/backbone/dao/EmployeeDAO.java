@@ -150,4 +150,48 @@ public class EmployeeDAO {
 		
 	}
 	
+	public static int update(int EMPNO,
+			String ENAME,String JOB, int MGR, Date HIREDATE,
+			int SAL,int COMM, int DEPTNO) throws Exception{
+		PreparedStatement query = null;
+		
+		Connection conn = null;
+		
+		try {
+			
+			conn = ConnectionHelper.RestFulDemoConn().getConnection(); //calls the method defined in the Oracle308tube package
+			
+			//simple sql query to return the date/time
+			query = conn.prepareStatement("update emp set  " +
+					"ENAME=?,JOB=?,MGR=?,HIREDATE=?,SAL=?,COMM=?,DEPTNO=? where EMPNO=?" );
+			query.setInt(1, EMPNO);
+			query.setString(2, ENAME);
+			query.setString(3, JOB);
+
+			
+			query.setInt(4, MGR);
+			java.sql.Date sqlDate = new java.sql.Date(HIREDATE.getTime());
+			query.setDate(5, sqlDate);
+			query.setInt(6, SAL);
+			query.setInt(7, COMM);
+			query.setInt(8, DEPTNO);
+			query.executeUpdate(); //note the new command for insert statement
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		/**
+		 * The finally cause will always run. Even if the the method get a error.
+		 * You want to make sure the connection to the database is closed.
+		 */
+		finally {
+			if (conn != null) conn.close();
+		}
+		
+		  return 200;
+		
+		
+	}
+	
 }

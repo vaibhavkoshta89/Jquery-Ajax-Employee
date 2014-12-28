@@ -26,6 +26,7 @@
 <th>SAL</th>
 <th>COMM</th>
 <th>DEPTNO</th>
+<th></th>
 </tr>
 </thead>
 
@@ -41,6 +42,7 @@
 <td><%= employee.get('SAL') %></td>
 <td><%= employee.get('COMM') %></td>
 <td><%= employee.get('DEPTNO') %></td>
+<td><a href="#/editEmp/<%= employee.get('EMPNO') %>" class='btn btn-warning'>Edit</a></td>
 </tr>
 <% }); %>
 </tbody>
@@ -51,43 +53,48 @@
 </div>
 
 </div>
-<div id="employee-form">
+<div id="employee-form" class="employee-form">
 <script type="text/template" id="edit-employee-template">
+
+<h1><%= employee %> Test</h1>
+<div id="header"> <h3><%= employee ? 'Edit' : 'New' %> User</h3></div>
+
 <form class="form-horizontal" id="post-employee" method="post" name="post-employee">
 	<div class="form-group">
     <label for="empno">EMPNO</label>
-    <input type="text" class="form-control input-sm" id="empno" name="empno">
+    <input type="text" class="form-control input-sm" id="empno" name="empno" value="<%= employee ? employee.get('EMPNO') : '' %>">
   </div>
   <div class="form-group">
     <label for="ename">ENAME</label>
-    <input type="text" class="form-control input-sm" id="ename" name="ename">
+    <input type="text" class="form-control input-sm" id="ename" name="ename" value="<%= employee ? employee.get('ENAME') : '' %>">
   </div>
   <div class="form-group">
     <label for="job">JOB</label>
-    <input type="text" class="form-control input-sm" id="job" name="job">
+    <input type="text" class="form-control input-sm" id="job" name="job" value="<%= employee ? employee.get('JOB') : '' %>">
   </div>
   <div class="form-group">
     <label for="mgr">MGR</label>
-    <input type="text" class="form-control input-sm" id="mgr" name="mgr">
+    <input type="text" class="form-control input-sm" id="mgr" name="mgr" value="<%= employee ? employee.get('MGR'): '' %>">
   </div>
   <div class="form-group">
     <label for="hiredate">HIREDATE</label>
-    <input type="date" class="form-control input-sm" id="hiredate" name="hiredate">
+    <input type="date" class="form-control input-sm" id="hiredate" name="hiredate" value="<%= employee ? employee.get('HIREDATE') : '' %>">
   </div>
   <div class="form-group">
     <label for="sal">SAL</label> 
-    <input type="text" class="form-control input-sm" id="sal" name="sal">
+    <input type="text" class="form-control input-sm" id="sal" name="sal" value="<%= employee ? employee.get('SAL') : '' %>">
   </div>
   <div class="form-group">
     <label for="comm">COMM</label>
-    <input type="text" class="form-control input-sm" id="comm" name="comm">
+    <input type="text" class="form-control input-sm" id="comm" name="comm" value="<%= employee ? employee.get('COMM') : '' %>">
   </div>
   <div class="form-group">
     <label for="deptno">DEPTNO</label>
-    <input type="text" class="form-control input-sm" id="deptno" name="deptno">
+    <input type="text" class="form-control input-sm" id="deptno" name="deptno" value="<%= employee ? employee.get('DEPTNO') : '' %>">
   </div>
   <button type="button" name="submit" class="btn btn-primary addUser" id="submitEmployee">Submit</button>
 </form>
+
 </script>
 </div>
 </div>
